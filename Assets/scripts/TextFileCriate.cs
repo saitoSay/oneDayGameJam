@@ -9,7 +9,7 @@ public class TextFileCriate : MonoBehaviour
     /// <summary>ファイルの名前</summary>
     [SerializeField] string m_fileName = null;
     /// <summary></summary>
-    [SerializeField] string m_data = null;
+    //[SerializeField] string m_data = null;
 
     public void CreateFIle()
     {
@@ -36,8 +36,7 @@ public class TextFileCriate : MonoBehaviour
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    m_data = line;
-                    Debug.Log(m_data);
+                    Debug.Log(line);
                 }
             }
         }
