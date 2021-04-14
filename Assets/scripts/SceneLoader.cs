@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// シーンロードスクリプト
 /// </summary>
 public class SceneLoader : MonoBehaviour
 {
+    /// <summary>シーンの名前</summary>
     [SerializeField] string scenename = "";
-
+    
     /// <summary>
     /// シーンを変える
     /// </summary>
@@ -17,5 +19,9 @@ public class SceneLoader : MonoBehaviour
     public void ChangeScene()
     {
         SceneManager.LoadScene(scenename);
+    }
+    public void CoolTime(float time)
+    {
+        Invoke("ChangeScene", time);
     }
 }
