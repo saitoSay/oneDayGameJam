@@ -11,8 +11,9 @@ public class CreateMap : MonoBehaviour
     [SerializeField] Tilemap m_tilemap;
     [SerializeField] Tile m_roadTile;
     [SerializeField] Tile m_wallTIle;
-    [SerializeField] Tile m_startTile;
-    [SerializeField] Tile m_goalTIle;
+    [SerializeField] GameObject m_startObj;
+    [SerializeField] GameObject m_goalObj;
+    [SerializeField] GameObject m_player;
     void Start()
     {
         SpritMapData();
@@ -30,7 +31,8 @@ public class CreateMap : MonoBehaviour
         {
             for (int j = 0; j < m_mapData.GetLength(1); j++)
             {
-                Vector3Int tilePosition = new Vector3Int(j - m_mapData.GetLength(0)/2, -i + m_mapData.GetLength(1) / 2, 0);
+                Vector3Int tilePosition = new Vector3Int(j - m_mapData.GetLength(0) / 2, -i + m_mapData.GetLength(1) / 2, 0);
+                Vector3 objPosition = new Vector3(j - m_mapData.GetLength(0) / 2, -i + m_mapData.GetLength(1) / 2, 0);
                 switch (m_mapData[i,j])
                 {
                     case (int)MapStates.Road:
@@ -40,10 +42,11 @@ public class CreateMap : MonoBehaviour
                         m_tilemap.SetTile(tilePosition, m_wallTIle);
                         break;
                     case (int)MapStates.Start:
-                        m_tilemap.SetTile(tilePosition, m_startTile);
+                        Instantiate(m_startObj, objPosition, Quaternion.identity).transform.parent = m_tilemap.transform;
+                        Instantiate(m_player, objPosition, Quaternion.identity).transform.parent = m_tilemap.transform;
                         break;
                     case (int)MapStates.Goal:
-                        m_tilemap.SetTile(tilePosition, m_goalTIle);
+                        Instantiate(m_goalObj, objPosition, Quaternion.identity).transform.parent = m_tilemap.transform;
                         break;
                     default:
                         break;
